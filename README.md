@@ -9,7 +9,7 @@ Spring Boot + Semantic UI build a full-stack web app
   - [canvas-nest.js](https://www.npmjs.com/package/canvas-nest.js/v/2.0.4): particle-effects are added to all pages
 - 9/15/2021
   - Admin panel pages are finished;
-  - Modules are added to improve the web apperance
+  - Modules are added to improve the web appearance
     - [animate.css](https://animate.style/): animation styles for div
     - [Editor.md](https://pandao.github.io/editor.md/): Markdown editor
     - [Prism](https://prismjs.com/): display modules for codes
