@@ -15,4 +15,5 @@ Spring Boot + Semantic UI build a full-stack web app
     - [Prism](https://prismjs.com/): display modules for codes
     - [tocbot](https://tscanlin.github.io/tocbot/): generate a table as the content list
     - [typo.css](https://github.com/sofish/typo.css): text style optimization
-    - 
+    - [qrcode.js](https://davidshimjs.github.io/qrcodejs/): generate QR code
+    - [jQuery.scrollTo](https://github.com/flesler/jquery.scrollTo): animated scrolling
