@@ -23,9 +23,11 @@ Spring Boot + Semantic UI build a full-stack web app
     - JPA
     - MySQL driver
     - AOP (for logging files, need to downgrade Spring to V2.4.0)
-      - `<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
-        </dependency>`
+      - ```
+        <dependency>  
+            <groupId>org.springframework.boot</groupId>  
+            <artifactId>spring-boot-starter-aop</artifactId>  
+        </dependency>
+        ```
     - Thymeleaf
     - DevTools
