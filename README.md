@@ -17,3 +17,15 @@ Spring Boot + Semantic UI build a full-stack web app
     - [typo.css](https://github.com/sofish/typo.css): text style optimization
     - [qrcode.js](https://davidshimjs.github.io/qrcodejs/): generate QR code
     - [jQuery.scrollTo](https://github.com/flesler/jquery.scrollTo): animated scrolling
+- 9/16/2021
+  - Config Spring Boot
+    - Web
+    - JPA
+    - MySQL driver
+    - AOP (for logging files, need to downgrade Spring to V2.4.0)
+      - `<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>`
+    - Thymeleaf
+    - DevTools
