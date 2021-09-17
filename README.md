@@ -31,3 +31,5 @@ Spring Boot + Semantic UI build a full-stack web app
         ```
     - Thymeleaf
     - DevTools
+  - Config log files
+  - Config static with thymeleaf with th:fragment
