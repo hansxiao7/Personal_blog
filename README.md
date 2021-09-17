@@ -33,3 +33,8 @@ Spring Boot + Semantic UI build a full-stack web app
     - DevTools
   - Config log files
   - Config static with thymeleaf with th:fragment
+- 9/17/2021
+  - Classes/Entities are built, including User, Comment, Blog, Tag, Tab;
+  - Login service finished;
+    - Password encrypted with MD5 hex hashing;
+    - Log-in interceptor added by HandlerInterceptor and WebMvcConfigurer.
