@@ -41,4 +41,5 @@ Spring Boot + Semantic UI build a full-stack web app
 - 9/18/2021
   - Tags and Types admin service are finished;
   - Blog admin service is finished;
-    - JpaSpecificationExecutor is used for dynamic queries on blogs based on blog title and types.
+    - JpaSpecificationExecutor is used for dynamic queries on blogs based on blog title and types;
+    - Live reload table by JQuery and Thymeleaf.
