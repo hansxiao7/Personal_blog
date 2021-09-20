@@ -43,3 +43,9 @@ Spring Boot + Semantic UI build a full-stack web app
   - Blog admin service is finished;
     - JpaSpecificationExecutor is used for dynamic queries on blogs based on blog title and types;
     - Live reload table by JQuery and Thymeleaf.
+
+- 9/19/2021
+  - Admin services for blogs are finished;
+  - The front page and blog pages are finished;
+    - [CommonMark](https://github.com/commonmark/commonmark-java) is used to transfer blog context (String) to HTML format;
+  - Search blog service is finished by applying @Query notations.
