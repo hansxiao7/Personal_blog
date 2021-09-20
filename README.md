@@ -48,4 +48,5 @@ Spring Boot + Semantic UI build a full-stack web app
   - Admin services for blogs are finished;
   - The front page and blog pages are finished;
     - [CommonMark](https://github.com/commonmark/commonmark-java) is used to transfer blog context (String) to HTML format;
-  - Search blog service is finished by applying @Query notations.
+  - Search blog service is finished by applying @Query notations;
+  - Use DFS to build and display the comment layered structure.
