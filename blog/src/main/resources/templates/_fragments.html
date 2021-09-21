@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">Blog</title>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/semantic/dist/semantic.min.css" th:href="@{/semantic/dist/semantic.min.css}">
+    <script src="../static/semantic/dist/semantic.min.js" th:src="@{/semantic/dist/semantic.min.js}"></script>
+    <link rel='stylesheet' href="../static/css/typo.css" th:href="@{/css/typo.css}"/>
+    <link rel="stylesheet" href="../static/lib/prism/prism.css"  th:href="@{/lib/prism/prism.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="../static/lib/tocbot-4.12.0/dist/tocbot.css" th:href="@{/lib/tocbot-4.12.0/dist/tocbot.css}">
+    <link rel='stylesheet' href="../static/css/me.css" th:href="@{/css/me.css}"/>
+</head>
+
+<body>
+    <nav class="ui inverted attached segment m-padded-tb-mini m-shadow-small" th:fragment="nav(n)">
+        <div class="ui container">
+            <div class="ui inverted secondary stackable menu">
+                <h2 class="ui header item" id='logo'>猛哥の萌哥</h2>
+                <a th:href='@{/}' class='m-item item m-mobile-hide' th:classappend="${n==1} ? 'active'"><i class="home icon"></i>Main</a>
+                <a th:href='@{/types}' class='m-item item m-mobile-hide' th:classappend="${n==2} ? 'active'"><i class="idea icon"></i>Categories</a>
+                <a th:href='@{/tags}' class='m-item item m-mobile-hide' th:classappend="${n==3} ? 'active'"><i class="tags icon"></i>Tags</a>
+                <a th:href='@{/archive}' class='m-item item m-mobile-hide' th:classappend="${n==4} ? 'active'"><i class="clone icon"></i>Archive</a>
+                <a th:href='@{/about}' class='m-item item m-mobile-hide' th:classappend="${n==5} ? 'active'"><i class="info icon"></i>About Me</a>
+                <div class='m-item right item m-mobile-hide'>
+                    <form name="search" th:action="@{/search}" method="POST" target="_blank">
+                        <div class='ui icon input'>
+                            <input type='text' name="query" placeholder="Search" th:value="${query}"/>
+                            <i onclick="document.forms['search'].submit()" class="search link icon"></i>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <a href="#" class='ui menu toggle black button icon m-right-top m-mobile-show'>
+            <i class="sidebar icon"></i>
+        </a>
+    </nav>
+
+    <!-- bottom footer -->
+    <footer class="ui inverted segment vertical m-padded-tb-massive" th:fragment="footer">
+        <div class="ui center aligned container">
+            <div class="ui divided inverted stackable grid">
+                <div class="three wide column">
+                    <div class="ui inverted link list">
+                        <div class="item">
+                            <img src='../static/images/wechat.jpg' th:src="@{/images/wechat.jpg}" class="ui rounded image" alt="" style="width: 110px" />
+                        </div>
+                    </div>
+                </div>
+                <div class="four wide column">
+                    <h4 class='ui inverted header m-text-thin m-text-spaced'><i class='edit outline icon'></i>Newest Blog</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">User Story</a>
+                        <a href="#" class="item">User Story</a>
+                        <a href="#" class="item">User Story</a>
+                    </div>
+                </div>
+                <div class="four wide column">
+                    <h4 class='ui inverted header m-text-thin m-text-spaced'><i class='envelope outline icon'></i> Contact Me</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">User Story</a>
+                        <a href="#" class="item">User Story</a>
+                        <a href="#" class="item">User Story</a>
+                    </div>
+                </div>
+                <div class="five wide column">
+                    <h4 class='ui inverted header m-text-thin m-text-spaced'><i class='address card outline icon'></i>About Mengge</h4>
+                    <p class='m-text-thin m-text-spaced m-opacity-mini'>蒙哥萌萌萌嫩更猛猛猛恶魔蒙哥萌萌萌嫩更猛猛猛蒙哥萌萌萌嫩更猛猛猛蒙哥萌萌萌嫩更猛猛猛蒙哥萌萌萌嫩更猛猛猛蒙哥萌萌萌嫩更猛猛猛</p>
+                </div>
+            </div>
+            <div class="ui inverted section divider"></div>
+            <p class='m-text-thin m-text-spaced m-opacity-tiny'>©2020-2021 <img class="ui avatar image" src="../static/images/helen.jpg" th:src="@{/images/helen.jpg}"> mengge</p>
+        </div>
+    </footer>
+    <th:block th:fragment="script">
+        <script type="text/javascript" color="255,0,0" pointcolor="255,0,0" opacity="1" zindex="-1" count="500" th:src="@{/node_modules/canvas-nest.js/dist/canvas-nest.js}" src="../static/node_modules/canvas-nest.js/dist/canvas-nest.js"></script>
+        <script src='../static/lib/prism/prism.js' th:src="@{/lib/prism/prism.js}"></script>
+        <script src='../static/lib/tocbot-4.12.0/dist/tocbot.min.js' th:src="@{/lib/tocbot-4.12.0/dist/tocbot.min.js}"></script>
+        <script src='../static/lib/qrcodejs/qrcode.min.js' th:src="@{/lib/qrcodejs/qrcode.min.js}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.3/jquery.scrollTo.min.js"></script>
+    </th:block>
+
+</body>
+</html>

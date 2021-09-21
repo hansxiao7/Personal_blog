@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:replace="_fragments :: head(${blog.title})">
+    <title></title>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav th:replace="_fragments :: nav(0)">
+    </nav>
+
+    <!-- Content -->
+    <div class='m-padded-tb-big m-container-small animate__animated animate__fadeIn'>
+        <div class="ui container">
+            <!-- header -->
+            <div class="ui top attached segment ">
+                <div class="ui mini horizontal link list">
+                    <div class="item">
+                        <img th:src="@{${blog.user.avatar}}" src="../static/images/helen.jpg" alt="" class="ui avatar image">
+                        <div class="content"><a href="#" target="_blank" class="header" th:text="${blog.user.nickname}">小猛哥</a></div>
+                    </div>
+                    <div class="item">
+                        <i class="calendar icon"></i><span th:text="${#dates.format(blog.updateTime, 'yyyy-MM-dd')}">2020-01-01</span>
+                    </div>
+                    <div class="item">
+                        <i class="eye icon"></i> <span th:text="${blog.views}">2222</span>
+                    </div>
+                    <div class="item">
+                        <i class="comment outline icon"></i> <span th:text="${#arrays.length(blog.comments)}">2222</span>
+                    </div>
+                </div>
+            </div>
+            <!-- figure -->
+            <div class="ui attached segment padded">
+                <img th:src="@{${blog.firstPic}}" src="https://picsum.photos/800/450?grayscale" alt="" class="ui fluid image rounded">
+            </div>
+            <!-- content -->
+            <div class="ui attached segment">
+                <div class="ui right aligned basic segment">
+                    <div class="ui orange basic label" th:text="${blog.flag}">label</div>
+                </div>
+                <h2 class="ui center aligned header" th:text="${blog.title}">大圣，此去欲何?</h2>
+                <br>
+                <div id='content' class='js-toc-content typo typo-selection m-padded-lr-responsive m-padded-tb-large' th:utext="${blog.content}">
+                    <h2 id='section1' class="ui center aligned header">来玩啊大圣</h2>
+                    <p>
+                        戴上金箍，没法爱你；放下金箍，没法保护你。我知道上天不会给我第二次机会，曾经我们说好的永远，原来也仅仅只有，十二画，而已。“大圣，此去欲何?”“踏南天，碎凌霄。”“若一去不回……”“便一去不回” 其实很多时候，我们都是有机会的，最后真正放弃的，是我们自己。......
+                    </p>
+                    <pre><code class="language-css">p { color: red }</code></pre>
+                </div>
+                <!-- Tags -->
+                <div class='m-padded-lr'>
+                    <div class="ui basic teal left pointing label" th:each="tag : ${blog.tags}"> <span th:text="${tag.name}"></span></div>
+                </div>
+                <!-- donate -->
+                <div class="ui center aligned basic segment" th:if="${blog.donate}">
+                    <button id='payButton' class="ui orange basic circular button">Donate</button>
+                </div>
+                <div class="ui payQR flowing popup transition hidden">
+                    <div class="ui orange basic label">
+                        <div class="ui images" style="font-size: inherit;">
+                            <div class="image">
+                                <img src="../static/images/wechat.jpg" alt="" class='ui rounded bordered image' style="width:120px">
+                                <div>Wechat</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- info -->
+            <div class="ui attached positive message">
+                <div class="ui middle aligned grid">
+                    <div class="eleven wide column">
+                        <ui class="list">
+                            <li>Author: <span th:text="${blog.user.nickname}"></span></li>
+                            <li>Publish Time: <span th:text="${#dates.format(blog.createTime)}"></span></li>
+                            <li>Update Time: <span th:text="${#dates.format(blog.updateTime)}"></span></li>
+                        </ui>
+                    </div>
+                    <div class="five wide column">
+                        <img th:src="@{/images/wechat.jpg}" src="../static/images/wechat.jpg" alt="" class='ui right floated rounded bordered image' style="width:120px">
+                    </div>
+                </div>
+            </div>
+            <!-- Comment -->
+            <div class="ui bottom attached segment">
+                <div class="ui teal segment" id="comment-container">
+                    <div class="ui threaded comments" style="max-width: 100%">
+                        <h3 class="ui dividing header">Comments</h3>
+                        <div class="comment" th:each="comment : ${comments}">
+                            <a class="avatar">
+                                <img th:src="@{${comment.avatar}}" src="../static/images/jenny.jpg">
+                            </a>
+                            <div class="content">
+                                <a class="author">
+                                    <span th:text="${comment.nickname}"></span>
+                                    <div class="ui basic teal mini left pointing label m-padded-mini" th:if="${comment.adminComment} == true">Admin</div>
+                                </a>
+                                <div class="metadata">
+                                    <span class="date" th:text="${#dates.format(comment.createTime)}">Just now</span>
+                                </div>
+                                <div class="text" th:text="${comment.content}">
+                                    Elliot you are always so right :)
+                                </div>
+                                <div class="actions">
+                                    <a class="reply" th:attr="data-commentid=${comment.id}, data-commentnickname=${comment.nickname}" data-commentid="1" data-commentnickname="Matt" onclick="reply(this)">Reply</a>
+                                </div>
+                            </div>
+                            <div class="comments" th:if="${#arrays.length(comment.replyComments)} > 0">
+                                <div class="comment" th:each = "reply : ${comment.replyComments}">
+                                    <a class="avatar">
+                                        <img th:src="@{${reply.avatar}}" src="../static/images/jenny.jpg">
+                                    </a>
+                                    <div class="content">
+                                        <a class="author" >
+                                            <span th:text="${reply.nickname}">Jenny Hess</span>
+                                            <div class="ui basic teal mini left pointing label m-padded-mini" th:if="${reply.adminComment} == true">Admin</div>
+                                            <span th:text="'@'+${reply.parentComment.nickname}" style="color: teal"></span>
+                                        </a>
+                                        <div class="metadata">
+                                            <span class="date" th:text="${#dates.format(reply.createTime)}">Just now</span>
+                                        </div>
+                                        <div class="text" th:text="${reply.content}">
+                                            Elliot you are always so right :)
+                                        </div>
+                                        <div class="actions">
+                                            <a class="reply" th:attr="data-commentid=${reply.id}, data-commentnickname=${reply.nickname}" data-commentid="1" data-commentnickname="Matt" onclick="reply(this)">Reply</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <form id="comment-form" method='POST' class="ui reply required form" th:action="@{/blog/{id}(id=${blog.id})}">
+                            <input type="hidden" name="blog.id" th:value="${blog.id}">
+                            <input type="hidden" name="parentComment.id" th:value="-1">
+                            <div class="field">
+                                <textarea name='content' placeholder="Please add response here"></textarea>
+                            </div>
+                            <div class="fields">
+                                <div class="field m-mobile-wide m-margin-bottom-mini">
+                                    <div class="ui left icon input">
+                                        <i class="user icon"></i>
+                                        <input type="text" name='nickname' placeholder="Name">
+                                    </div>
+                                </div>
+                                <div class="field m-mobile-wide m-margin-bottom-mini">
+                                    <div class="ui left icon input">
+                                        <i class="mail icon"></i>
+                                        <input type="text" name='email' placeholder="Email">
+                                    </div>
+                                </div>
+                                <div class="field m-mobile-wide m-margin-bottom-mini">
+                                    <div onclick="clearData(this)" class="ui labeled icon button m-mobile-wide">
+                                        <i class="undo icon"></i> Reset
+                                    </div>
+                                </div>
+                                <div class="field m-mobile-wide m-margin-bottom-mini">
+                                    <button type='submit' class="ui teal labeled submit icon button m-mobile-wide">
+                                      <i class="icon edit"></i> Add Reply
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="ui error message"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="m-padded m-fixed m-right-bottom">
+        <div class="ui vertical icon buttons">
+            <button type='button' class="ui toc teal button"><i class="book icon"></i></button>
+            <div id='toComments' class="ui teal button"><i class="comments icon"></i></div>
+            <button id='wechatBtn' class="ui icon button" data-position="left center"><i class="weixin icon"></i></button>
+            <div id='toTop' class="ui icon button"><i class="chevron up icon"></i></div>
+        </div>
+    </div>
+
+    <!-- content list -->
+    <div class="ui js-toc toc toc-container flowing popup transition hidden" style="width: 250px">
+    </div>
+    <!-- wechat QR code -->
+    <div class="ui wechatQR flowing popup transition hidden" style="width: 130px">
+        <div id='qrcode' class="image">
+
+        </div>
+    </div>
+
+    <!-- bottom footer -->
+    <footer th:replace="_fragments :: footer">
+    </footer>
+
+    <div th:insert="_fragments :: script"></div>
+    <script th:inline="javascript">
+        $('.menu.toggle').click(() => {
+            $('.m-item').toggleClass('m-mobile-hide');
+        })
+
+        $('#payButton').popup({
+            popup: $('.payQR.popup'),
+            on: 'click',
+            position: 'bottom center'
+        })
+        $('.toc.button').popup({
+            popup: $('.js-toc'),
+            on: 'click',
+            position: 'left center'
+        })
+        $('#wechatBtn').popup({
+            popup: $('.wechatQR.popup'),
+            on: 'click',
+            position: 'left center'
+        })
+
+        tocbot.init({
+            // Where to render the table of contents.
+            tocSelector: '.toc-container',
+            // Where to grab the headings to build the table of contents.
+            contentSelector: '.js-toc-content',
+            // Which headings to grab inside of the contentSelector element.
+            headingSelector: 'h1, h2, h3',
+            // For headings inside relative or absolute positioned containers within content.
+            hasInnerContainers: true,
+        });
+
+        var server = "http://localhost:8080";
+        var url = /*[[@{/blog/{id}(id=${blog.id})}]]*/ "";
+        var qrcode = new QRCode("qrcode", {
+            text: server + url,
+            width: 100,
+            height: 100,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+
+        $('#toTop').click(function() {
+            $(window).scrollTo(0, 500)
+        })
+
+        $('#toComments').click(function() {
+            $(window).scrollTo($("#comment-container"), 500)
+        })
+
+
+        $('.ui.form').form({
+            fields: {
+                nickname: {
+                    identifier: 'nickname',
+                    rules: [{
+                        type: 'empty',
+                        prompt: 'Please input nickname'
+                    }]
+                },
+
+                content: {
+                    identifier: 'content',
+                    rules: [{
+                        type: 'empty',
+                        prompt: 'Please input content'
+                    }]
+                },
+
+                email: {
+                    identifier: 'email',
+                    rules: [{
+                        type: 'empty',
+                        prompt: 'Please input email'
+                    }]
+                }
+            }
+        })
+
+        function reply(obj){
+            var commentId = $(obj).data('commentid');
+            var commentNickname = $(obj).data('commentnickname');
+            $("[name='content']").attr("placeholder", "@" + commentNickname).focus();
+            $("[name='parentComment.id']").val(commentId);
+            $(window).scrollTo($('#comment-form'), 500);
+        }
+
+        function clearData(obj){
+            $("[name='content']").attr("placeholder", "Please add response here");
+            $("[name='parentComment.id']").val(-1);
+            $(window).scrollTo($('#comment-form'), 500);
+        }
+    </script>
+
+</body>
+
+</html>

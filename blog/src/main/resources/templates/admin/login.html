@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:replace="_fragments :: head('Log-In')">
+    <title>Log In</title>
+</head>
+
+<body>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="m-container-small m-padded-tb-massive" style="max-width: 30em !important;">
+        <div class="ui middle aligned center aligned grid">
+            <div class="column">
+                <h2 class="ui teal image header">
+                    <img src="../../static/images/avatar/steve.jpg" th:src="@{/images/avatar/default.jpg}" class="ui avatar image" sizes="100px">
+                    <div class="content">
+                        Log-in to your account
+                    </div>
+                </h2>
+                <form class="ui large form" method='POST' action="#" th:action="@{/admin/login}">
+                    <div class="ui stacked segment">
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="user icon"></i>
+                                <input type="text" name="username" placeholder="Username">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="lock icon"></i>
+                                <input type="password" name="password" placeholder="Password">
+                            </div>
+                        </div>
+                        <button type='submit' class="ui fluid large teal submit button">Login</button>
+                    </div>
+
+                    <div class="ui error message"></div>
+                    <div class="ui negative message" th:unless="${#strings.isEmpty(message)}" th:text="${message}"></div>
+                </form>
+
+                <div class="ui message">
+                    New to us? <a href="#">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $('.ui.form').form({
+            fields: {
+                username: {
+                identifier: 'username',
+                    rules: [{
+                    type: 'empty',
+                    prompt: 'Please input Username!'
+                    }]
+                },
+                password: {
+                    identifier: 'password',
+                    rules: [{
+                        type: 'empty',
+                        prompt: 'Please input Password!'
+                    }]
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:replace="admin/_fragments :: head('Welcome!')">
+    <title></title>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav th:replace="admin/_fragments :: adminNav(0)">
+    </nav>
+
+    <div th:replace="admin/_fragments :: secondMenu(0)">
+    </div>
+
+    <!-- Content -->
+    <div class='m-padded-tb-big m-container-small'>
+        <div class="ui contaniner">
+            <div class="ui success large message">
+                <h2>Hi, </h2>
+                <p><strong th:text="${session.user.username}">hansxiao7</strong>, welcome!</p>
+            </div>
+
+            <img src="https://picsum.photos/1000/400?grayscale" class="ui rounder bordered fluid image">
+        </div>
+    </div>
+
+
+    <!-- bottom footer -->
+    <footer th:replace="admin/_fragments :: footer">
+    </footer>
+    <div th:replace="admin/_fragments :: script"></div>
+    <script>
+        $('.menu.toggle').click(() => {
+            $('.m-item').toggleClass('m-mobile-hide');
+        })
+
+        $('.ui.dropdown').dropdown({})
+    </script>
+</body>
+
+</html>

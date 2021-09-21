@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="admin/_fragments :: head('Tags')">
+    <title></title>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav th:replace="admin/_fragments :: adminNav(3)">
+    </nav>
+    <div class="ui attached pointing menu">
+        <div class="ui container">
+            <div class="right menu">
+                <a href="#" th:href="@{/admin/tags/input}" class="item">New</a>
+                <a href="#" th:href="@{/admin/tags}" class="active teal item">List</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content -->
+
+
+    <div class='m-padded-tb-big m-container-small'>
+        <div class="ui contaniner">
+            <div class="ui message" th:unless="${#strings.isEmpty(message)}" th:classappend="${messageType == true}? 'success' : 'negative'">
+                <i class="close icon"></i>
+                <div class="header">Info:</div>
+                <div th:text="${message}">Success</div>
+            </div>
+            <table class="ui selectable celled compact table">
+                <thead>
+                    <tr class="center aligned">
+                        <th class="four wide"></th>
+                        <th class="eight wide">tags</th>
+                        <th class="four wide">Manage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="tag, iterStat : ${page.content}">
+                        <td th:text="${iterStat.count}" class="center aligned">1</td>
+                        <td th:text="${tag.name}" class="center aligned">random type</td>
+                        <td class="center aligned">
+                            <a href="#" th:href="@{/admin/tags/{id}/input(id=${tag.id})}" class="ui mini teal basic button"><i class='edit icon'></i>Edit</a>
+                            <a href="#" th:href="@{/admin/tags/{id}/delete(id=${tag.id})}" class="ui mini red basic button"><i class='trash alternate icon'></i>Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="3">
+                            <div class="ui left floated pogination menu">
+                                <a th:href="@{/admin/tags(page=${page.number}-1)}" th:unless="${page.first}" class="icon item">
+                                    Prev
+                                </a>
+                                <a th:href="@{/admin/tags(page=${page.number}+1)}" th:unless="${page.last}" class="icon item">
+                                    Next
+                                </a>
+                            </div>
+                            <div class="ui teal inverted right floated pogination menu">
+                                <a class="icon item" th:href="@{/admin/tags/input}">
+                                    New
+                                </a>
+                            </div>
+                        </th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+
+    <!-- bottom footer -->
+    <footer th:replace="admin/_fragments :: footer">
+    </footer>
+    <div th:replace="admin/_fragments :: script"></div>
+    <script>
+        $('.menu.toggle').click(() =>{
+            $('.m-item').toggleClass('m-mobile-hide');
+        })
+
+        $('.ui.dropdown').dropdown({
+        })
+
+        $('.message .close').on('click', function (){
+            $(this).closest('.message').transition('fade');
+        })
+    </script>
+</body>
+</html>

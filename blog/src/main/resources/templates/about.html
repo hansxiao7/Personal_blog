@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="_fragments :: head('About Me')">
+    <title></title>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav th:replace="_fragments :: nav(5)">
+    </nav>
+
+    <!-- Content -->
+    <div class='m-padded-tb-big m-container'>
+        <div class="ui container">
+            <div class="ui stackable grid">
+                <!-- selfie -->
+                <div class='eleven wide column'>
+                    <div class="ui segment">
+                        <img src="../static/images/nan.jpg" th:src="@{/images/nan.jpg}" class="ui small centered image">
+                    </div>
+                </div>
+                <!-- Tags on the right column -->
+                <div class='five wide column'>
+                    <div class="ui segments">
+                        <div class="ui top attached segment">
+                            <h3 class="ui teal header">About me</h3>
+                        </div>
+                        <div class="ui teal attached segment m-text">
+                            <p class="content">我叫小猛哥，同时也叫小萌哥。有一只猫叫肥孬。</p>
+                        </div>
+                        <div class="ui attached segment m-padded-tb-small">
+                            <div class="ui mini basic teal button m-margin-tb-tiny" th:each="type : ${types}">
+                                <i class="tag icon"></i> <span th:text="${type.name}"></span>
+                            </div>
+                        </div>
+                        <div class="ui attached segment m-padded-tb-small">
+                            <div class="ui mini rounded orange basic button m-margin-tb-tiny" th:each="flag : ${flags}" th:text="${flag}">Original</div>
+
+                        </div>
+                        <div class="ui bottom attached segment">
+                            <div class="ui center aligned container">
+                                <a href="#" target="_blank">
+                                    <i class="large github icon"></i>
+                                </a>
+                                <a href="#" target="_blank">
+                                    <i class="large linkedin icon"></i>
+                                </a>
+                                <a href="#" target="_blank">
+                                    <i class="large mail icon"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+
+    <!-- bottom footer -->
+    <footer th:replace="_fragments :: footer">
+    </footer>
+    <div th:insert="_fragments :: script"></div>
+    <script>
+        $('.menu.toggle').click(() =>{
+            $('.m-item').toggleClass('m-mobile-hide');
+        })
+    </script>
+
+    
+</body>
+</html>

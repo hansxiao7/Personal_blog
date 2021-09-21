@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:replace="admin/_fragments :: head('New Tag')">
+    <title></title>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav th:replace="admin/_fragments :: adminNav(3)">
+    </nav>
+    <div class="ui attached pointing menu">
+        <div class="ui container">
+            <div class="right menu">
+                <a href="#" th:href="@{/admin/tags/input}" class="active teal item">New</a>
+                <a href="#" th:href="@{/admin/tags}" class="item">List</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class='m-padded-tb-big m-container-small'>
+        <div class="ui contaniner">
+            <form action="#" method='POST' class="ui form" th:action="${tag == null}? @{/admin/tags} : @{/admin/tags/{id}(id=${tag.id})}" th:object="${tag}">
+                <div class="required field">
+                    <div class="ui left labeled action input">
+                        <label class="ui teal basic label">New Blog Tag</label>
+                        <input type="text" name='name' placeholder="Blog Tag" th:value="${tag != null}? ${tag.name}">
+                    </div>
+                </div>
+
+
+                <div class="ui error message"></div>
+                <div class="ui right aligned container">
+                    <button type='button' class="ui orange button" onclick="window.history.go(-1)">Go Back</button>
+                    <button class="ui teal button">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <!-- bottom footer -->
+    <footer th:replace="admin/_fragments :: footer">
+    </footer>
+    <div th:replace="admin/_fragments :: script"></div>
+
+    <script src='../../static/lib/editor.md/editormd.min.js'></script>
+    <script>
+        $('.menu.toggle').click(() => {
+            $('.m-item').toggleClass('m-mobile-hide');
+        })
+
+        $('.ui.dropdown').dropdown({})
+
+        $('.ui.form').form({
+            fields: {
+                name: {
+                    identifier: 'name',
+                    rules: [{
+                        type: 'empty',
+                        prompt: 'Please input a tag name'
+                    }]
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>

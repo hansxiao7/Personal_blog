@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="_fragments :: head('404')">
+    <title></title>
+</head>
+<body>
+    <!--    nav-->
+    <nav th:replace="_fragments :: nav(0)"></nav>
+
+    <div class='m-padded-tb-big m-container'>
+        <div class="ui container">
+            <img th:src="@{/images/error/404.jpg}" class="ui image rounded" sizes="height:300px">
+        </div>
+    </div>
+
+    <footer th:replace="_fragments :: footer"></footer>
+</body>
+</html>
